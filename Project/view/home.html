@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IS Project</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="/static/scripts/app.js"></script>
+    <script src="/static/scripts/homecontroller.js"></script>
+    <style type="text/css">
+        body {
+            font-size: 12pt;
+        }
+
+        input[type=text] {
+            width: 1000px;
+            font-size: 12pt;
+            margin-bottom: 5px;
+        }
+
+        .tree ul {
+            padding-top: 20px;
+            position: relative;
+        }
+
+        .tree li {
+            float: left;
+            text-align: center;
+            list-style-type: none;
+            position: relative;
+            padding: 20px 5px 0 5px;
+        }
+
+        .tree li::before,
+        .tree li::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 50%;
+            border-top: 1px solid rgb(17, 14, 14);
+            width: 50%;
+            height: 20px;
+        }
+
+        .tree li::after {
+            right: auto;
+            left: 50%;
+            border-left: 1px solid rgb(17, 14, 14);
+        }
+
+        .tree li:only-child::after,
+        .tree li:only-child::before {
+            display: none;
+        }
+
+        .tree li:only-child {
+            padding-top: 0;
+        }
+
+        .tree li:first-child::before,
+        .tree li:last-child::after {
+            border: 0 none;
+        }
+
+        .tree li:last-child::before {
+            border-right: 1px solid rgb(17, 14, 14);
+            border-radius: 0 5px 0 0;
+            /* -webkit-border-radius: 0 5px 0 0;
+            -moz-border-radius: 0 5px 0 0; */
+        }
+
+        .tree li:first-child::after {
+            border-radius: 5px 0 0 0;
+            /* -webkit-border-radius: 5px 0 0 0;
+            -moz-border-radius: 5px 0 0 0; */
+        }
+
+        .tree ul ul::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            border-left: 1px solid rgb(17, 14, 14);
+            width: 0;
+            height: 20px;
+        }
+
+        .tree li div {
+            border: 1px solid rgb(17, 14, 14);
+            padding: 5px 10px;
+            text-decoration: none;
+            color: rgb(17, 14, 14);
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 15px;
+            display: inline-block;
+
+            border-radius: 5px;
+            /* -webkit-border-radius: 5px;
+            -moz-border-radius: 5px; */
+        }
+    </style>
+
+</head>
+{% raw %}
+<body style="align-content: center" ng-app="isProject">
+<div ng-controller="homeController">
+    
+    <h1>{{title}}</h1>
+    <div ng-repeat="member in teammates">
+        <h3>{{member.name }} | {{ member.id}}</h3>
+    </div>
+
+    <div>
+        <p style="color: rgb(17, 17, 207)"><i><b>Symbols used:</b></i></p>
+        <p><b>A = A</b></p>
+        <p><b>~A = not(A)</b></p>
+        <p><b>A ^ B = and(A,B)</b></p>
+        <p><b>A v B = or(A,B)</b></p>
+        <p><b>A->B = if(A,B)</b></p>
+        <p><b>A<->B = iff(A, B)</b></p>
+        <input type="text" name="goal" ng-model="goal"placeholder="Enter the Formula"/><br/>
+        <input type="button" value="Submit" ng-click="submit(goal)"/>
+    </div>
+    <div ng-bind-html=responseData>
+    </div>
+
+</div>
+    
+</body>
+{% endraw  %}
+</html>
